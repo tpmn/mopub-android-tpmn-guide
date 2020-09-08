@@ -95,7 +95,7 @@ MoPub.initializeSdk(this, sdkConfig, initSdkListener());
 
 ## [MoPub 배너 광고 구현](https://developers.mopub.com/publishers/android/banner/)
 
-### 1. XML 레이아웃에 배너 슬롯 정의
+### 1. XML 레이아웃에 배너 인벤토리 정의
 ~~~
 <com.mopub.mobileads.MoPubView
 	android:id="@+id/adview"
@@ -105,7 +105,7 @@ MoPub.initializeSdk(this, sdkConfig, initSdkListener());
 </com.mopub.mobileads.MoPubView>
 ~~~
 
-### 2. 배너 슬롯에 광고 로드
+### 2. 배너 인벤토리에 광고 로드
 `Activity` 또는 `Fragment`에 `MoPubView` 객체를 선언하세요.
 ~~~java
 private MoPubView moPubView;
@@ -113,7 +113,7 @@ private MoPubView moPubView;
 `Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요.
 ~~~java
 moPubView = (MoPubView) findViewById(R.id.adview);
-moPubView.setAdUnitId(YOUR_BANNER_AD_UNID_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
+moPubView.setAdUnitId(YOUR_BANNER_AD_UNIT_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
 moPubView.setAdSize(MoPubAdSize); // 선택. Call this if you are not setting the ad size in XML or wish to use an ad size other than what has been set in the XML. Note that multiple calls to `setAdSize()` will override one another, and the MoPub SDK only considers the most recent one.
 moPubView.loadAd(MoPubAdSize); // 선택. Call this if you are not calling setAdSize() or setting the size in XML, or if you are using the ad size that has not already been set through either setAdSize() or in the XML.
 moPubView.loadAd();
