@@ -7,7 +7,7 @@
 ### 2. TPMN
 - MoPub ad unit ID 발급
 - 새 패키지 이름 전달
-- JKS 전달
+- .keystore 전달
 
 ### 3. 퍼블리셔
 - 패키지 이름 변경
@@ -17,7 +17,7 @@
     + [Facebook Audience Network](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/facebookaudiencenetwork): 미디에이션(선택)
     + [AdFit](https://github.com/tpmn/mopub-android-mediation-custom/tree/master/adfit): 미디에이션(선택)
 - 광고 테스트
-- APK/AAB 전달
+- .aab 전달
 
 ### 4. TPMN
 - 스토어 출시
