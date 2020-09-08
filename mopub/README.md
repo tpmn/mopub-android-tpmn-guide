@@ -86,7 +86,7 @@ network_security_config.xml에 cleartextTrafficPermitted를 true로 설정하는
 ## [MoPub SDK 초기화](https://developers.mopub.com/publishers/android/initialize/)
 `Activity`의 `onCreate()`에 다음을 추가하세요.
 ~~~java
-SdkConfiguration sdkConfig = new SdkConfiguration.Builder("xxxxxxxxxxx") // Enter any of your Ad Unit IDs
+SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_IDS_HERE) // 발급 받은 ad unit ID 중 하나를 넣으세요.
 						.withLogLevel(LogLevel.Debug)
 						.withLegitimateInterestAllowded(true)
 						.build();
@@ -95,7 +95,7 @@ MoPub.initializeSdk(this, sdkConfig, initSdkListener());
 
 ## [MoPub 배너 광고 구현](https://developers.mopub.com/publishers/android/banner/)
 
-### 1. XML 레이아웃에 배너 슬로 정의
+### 1. XML 레이아웃에 배너 슬롯 정의
 ~~~
 <com.mopub.mobileads.MoPubView
 	android:id="@+id/adview"
@@ -113,9 +113,9 @@ private MoPubView moPubView;
 `Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요.
 ~~~java
 moPubView = (MoPubView) findViewById(R.id.adview);
-moPubView.setAdUnitId("xxxxxxxxxxx"); // Enter your Ad Unit ID
-moPubView.setAdSize(MoPubAdSize); // Call this if you are not setting the ad size in XML or wish to use an ad size other than what has been set in the XML. Note that multiple calls to `setAdSize()` will override one another, and the MoPub SDK only considers the most recent one.
-moPubView.loadAd(MoPubAdSize); // Call this if you are not calling setAdSize() or setting the size in XML, or if you are using the ad size that has not already been set through either setAdSize() or in the XML
+moPubView.setAdUnitId(YOUR_BANNER_AD_UNID_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
+moPubView.setAdSize(MoPubAdSize); // 선택. Call this if you are not setting the ad size in XML or wish to use an ad size other than what has been set in the XML. Note that multiple calls to `setAdSize()` will override one another, and the MoPub SDK only considers the most recent one.
+moPubView.loadAd(MoPubAdSize); // 선택. Call this if you are not calling setAdSize() or setting the size in XML, or if you are using the ad size that has not already been set through either setAdSize() or in the XML.
 moPubView.loadAd();
 ~~~
 `Activity`의 `onDestroy()` 또는 `Fragment`의 `onDestroyView()`에 다음을 추가하세요.
@@ -126,7 +126,7 @@ if (moPubView != null) {
 }
 ~~~
 
-### 3. 리스너 구현
+### 3. 리스너 구현 (선택)
 ~~~java
 moPubView.setBannerAdListener(new BannerAdListener() {
 		@Override
@@ -156,7 +156,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 });
 ~~~
 
-## [MoPub 전면 광고 구현](https://developers.mopub.com/publishers/android/interstitial/)
+## [MoPub 인터스티셜 광고 구현](https://developers.mopub.com/publishers/android/interstitial/)
 
 ### 1. 광고 로드
 `Activity`에 `MoPubInterstitial` 변수를 선언하세요.
@@ -165,7 +165,7 @@ private MoPubInterstitial moPubInterstitial;
 ~~~
 `Activity`의 `onCreate()`에 다음을 추가하세요.
 ~~~java
-moPubInterstitial = new MoPubInterstitial(this, "xxxxxxxxxxx"); // Enter your Ad Unit ID
+moPubInterstitial = new MoPubInterstitial(this, YOUR_INTERSTILTIAL_AD_UNIT_ID_HERE); // 발급 받은 인터스티셜 ad unit ID를 넣으세요.
 moPubInterstitial.load();
 if (moPubInterstitial != null && moPubInterstitial.isReady()) {
 	moPubInterstitial.show();
@@ -179,7 +179,7 @@ if (moPubInterstitial != null) {
 }
 ~~~
 
-### 2. 리스너 구현
+### 2. 리스너 구현 (선택)
 ~~~java
 moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
             @Override
