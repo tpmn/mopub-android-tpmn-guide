@@ -7,7 +7,7 @@
 ### 2. TPMN
 - MoPub ad unit ID 발급
 - 새 패키지 이름 전달
-- .keystore 전달
+- .keystore 및 패스워드 전달
 
 ### 3. 퍼블리셔
 - 패키지 이름 변경
