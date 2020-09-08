@@ -106,7 +106,7 @@ MoPub.initializeSdk(this, sdkConfig, initSdkListener());
 ~~~
 
 ### 2. 배너 슬롯에 광고 로드
-`Activity` 또는 `Fragment`에 `MoPubView` 변수를 선언하세요.
+`Activity` 또는 `Fragment`에 `MoPubView` 객체를 선언하세요.
 ~~~java
 private MoPubView moPubView;
 ~~~
@@ -141,7 +141,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 
 		@Override
 		public void onBannerClicked(MoPubView banner) {
-		// Sent when the user has tapped on the banner.
+            // Sent when the user has tapped on the banner.
 		}
 
 		@Override	
@@ -159,7 +159,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 ## [MoPub 인터스티셜 광고 구현](https://developers.mopub.com/publishers/android/interstitial/)
 
 ### 1. 광고 로드
-`Activity`에 `MoPubInterstitial` 변수를 선언하세요.
+`Activity`에 `MoPubInterstitial` 객체를 선언하세요.
 ~~~java
 private MoPubInterstitial moPubInterstitial;
 ~~~
