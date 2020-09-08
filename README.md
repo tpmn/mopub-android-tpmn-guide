@@ -168,7 +168,7 @@ private MoPubInterstitial moPubInterstitial;
 moPubInterstitial = new MoPubInterstitial(this, "xxxxxxxxxxx"); // Enter your Ad Unit ID
 moPubInterstitial.load();
 if (moPubInterstitial != null && moPubInterstitial.isReady()) {
-	SplashScreenActivity.moPubInterstitial.show();
+	moPubInterstitial.show();
 }
 ~~~
 `Activity`의 `onDestroy()`에 다음을 추가하세요.
