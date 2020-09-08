@@ -25,8 +25,3 @@ dependencies {
 	implementation 'com.mopub.mediation:facebookaudiencenetwork:6.0.0.0'
 }
 ~~~
-
-
-
-# **AdFit (미디에이션 네트워크)**
-<https://github.com/tpmn/mopub-android-mediation-custom>

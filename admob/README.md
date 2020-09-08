@@ -41,7 +41,3 @@ dependencies {
 	implementation 'com.mopub.mediation:admob:19.3.0.2'
 }
 ~~~
-
-
-# **AdFit (미디에이션 네트워크)**
-<https://github.com/tpmn/mopub-android-mediation-custom>

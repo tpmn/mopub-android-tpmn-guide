@@ -12,7 +12,7 @@
 ### 3. 퍼블리셔
 - 패키지 이름 변경
 - 가이드에 따라 애플리케이션에 광고 SDK 통합
-+  [MoPub](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub): 메인(필수), 발급 받은 ID 사용
+    +  [MoPub](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub): 메인(필수), 발급 받은 ID 사용
     + [AdMob](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/admob): 미디에이션(선택)
     + [Facebook Audience Network](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/facebookaudiencenetwork): 미디에이션(선택)
 - 광고 테스트
