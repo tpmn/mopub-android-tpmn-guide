@@ -15,7 +15,7 @@
     +  [MoPub](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub): 메인(필수), 발급 받은 ID 사용
     + [AdMob](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/admob): 미디에이션(선택)
     + [Facebook Audience Network](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/facebookaudiencenetwork): 미디에이션(선택)
-    + [AdFit](https://github.com/tpmn/mopub-android-mediation-custom/adfit): 미디에이션(선택)
+    + [AdFit](https://github.com/tpmn/mopub-android-mediation-custom/tree/master/adfit): 미디에이션(선택)
 - 광고 테스트
 - APK/AAB 전달
 
