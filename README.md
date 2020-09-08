@@ -1,6 +1,6 @@
 # **MoPub**
 
-## [MoPub SDK 통합](https://developers.mopub.com/publishers/android/integrate/#step-3-update-your-android-manifest)
+## [MoPub SDK 통합](https://developers.mopub.com/publishers/android/integrate/)
 
 ### 1. MoPub SDK 다운로드
 MoPub SDK를 jCenter를 통해 다운로드할 수 있습니다. 앱 수준 build.gradle에 다음을 추가하세요.
