@@ -182,29 +182,29 @@ if (moPubInterstitial != null) {
 ### 2. 리스너 구현 (선택)
 ~~~java
 moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialLoaded(MoPubInterstitial interstitial) {
-                
-            }
+        @Override
+        public void onInterstitialLoaded(MoPubInterstitial interstitial) {
+            // The interstitial has been cached and is ready to be shown.
+        }
 
-            @Override
-            public void onInterstitialFailed(MoPubInterstitial interstitial, MoPubErrorCode errorCode) {
+        @Override
+        public void onInterstitialFailed(MoPubInterstitial interstitial, MoPubErrorCode errorCode) {
+            // The interstitial has failed to load. Inspect errorCode for additional information.
+        }
 
-            }
+        @Override
+        public void onInterstitialShown(MoPubInterstitial interstitial) {
+            // The interstitial has been shown. Pause / save state accordingly.
+        }
 
-            @Override
-            public void onInterstitialShown(MoPubInterstitial interstitial) {
+        @Override
+        public void onInterstitialClicked(MoPubInterstitial interstitial) {
+            // The interstitial has been clicked.
+        }
 
-            }
-
-            @Override
-            public void onInterstitialClicked(MoPubInterstitial interstitial) {
-
-            }
-
-            @Override
-            public void onInterstitialDismissed(MoPubInterstitial interstitial) {
-
-            }
-        });
+        @Override
+        public void onInterstitialDismissed(MoPubInterstitial interstitial) {
+            // The interstitial has being dismissed. Resume / load state accordingly.
+        }
+});
 ~~~
