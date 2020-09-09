@@ -90,6 +90,7 @@ SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_ID
 						.withLogLevel(LogLevel.Debug)
 						.withLegitimateInterestAllowded(true)
 						.build();
+                        
 MoPub.initializeSdk(this, sdkConfig, initSdkListener());
 ~~~
 
