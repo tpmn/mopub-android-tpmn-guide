@@ -1,6 +1,6 @@
 # **MoPub**
 
-## [MoPub SDK 통합](https://developers.mopub.com/publishers/android/integrate/)
+## MoPub SDK 통합 [(참고)](https://developers.mopub.com/publishers/android/integrate/)
 
 ### 1. MoPub SDK 다운로드
 MoPub SDK를 jCenter를 통해 다운로드할 수 있습니다. 앱 수준 build.gradle에 다음을 추가하세요.
@@ -83,7 +83,7 @@ network_security_config.xml에 cleartextTrafficPermitted를 true로 설정하는
 </network-security-config>
 ~~~
 
-## [MoPub SDK 초기화](https://developers.mopub.com/publishers/android/initialize/)
+## MoPub SDK 초기화 [(참고)](https://developers.mopub.com/publishers/android/initialize/)
 `Activity`의 `onCreate()`에 다음을 추가하세요.
 ~~~java
 SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_IDS_HERE) // 발급 받은 ad unit ID 중 하나를 넣으세요.
@@ -93,7 +93,7 @@ SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_ID
 MoPub.initializeSdk(this, sdkConfig, initSdkListener());
 ~~~
 
-## [MoPub 배너 광고 구현](https://developers.mopub.com/publishers/android/banner/)
+## MoPub 배너 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/banner/)
 
 ### 1. XML 레이아웃에 배너 인벤토리 정의
 ~~~
@@ -156,7 +156,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 });
 ~~~
 
-## [MoPub 인터스티셜 광고 구현](https://developers.mopub.com/publishers/android/interstitial/)
+## MoPub 인터스티셜 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/interstitial/)
 
 ### 1. 광고 로드
 `Activity`에 `MoPubInterstitial` 객체를 선언하세요.
