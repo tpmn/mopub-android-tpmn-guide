@@ -6,7 +6,7 @@
 MoPub SDK를 jCenter를 통해 다운로드할 수 있습니다. 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 repositories {
-	jcenter()
+    jcenter()
 }
 
 dependencies {
@@ -19,7 +19,7 @@ dependencies {
 ~~~groov
 // For banners
 implementation('com.mopub:mopub-sdk-banner:5.13.1@aar') {
-	transitive = true
+    transitive = true
 }
 
 // For fullscreen ads
@@ -63,8 +63,8 @@ INTERNET(필수), ACCESS_NETWORK_STATE(필수) 그리고 ACCESS_COARSE_LOCATION(
 AndroidManifest.xml에 다음을 추가하세요.
 ~~~
 <manifest>
-	<application
-         android:networkSecurityConfig="@xml/network_security_config">
+    <application
+        android:networkSecurityConfig="@xml/network_security_config">
 	</application>
 </manifest>
 ~~~
