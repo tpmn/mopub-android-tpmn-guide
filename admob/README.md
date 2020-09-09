@@ -15,7 +15,6 @@ allprojects {
 ~~~groovy
 dependencies {
 	implementation 'com.google.android.gms:play-services-ads:19.3.0'
-	implementation 'com.mopub.mediation:admob:19.3.0.2'
 }
 ~~~
 
@@ -24,9 +23,10 @@ AndroidManifest.xml에 다음을 추가하세요.
 ~~~
 <manifest>
 	<application>
+        <!-- 발급 받은 AdMob app ID를 넣으세요. -->
 		<meta-data
 			android:name="com.google.android.gms.ads.APPLICATION_ID"
-			android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+			android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/> 
 	</application>
 </manifest>
 ~~~
