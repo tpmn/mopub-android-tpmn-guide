@@ -50,7 +50,8 @@ android {
 ~~~
 
 ### 2. AndroidManifest.xml 업데이트
-INTERNET(필수), ACCESS_NETWORK_STATE(필수) 그리고 ACCESS_COARSE_LOCATION(선택) 퍼미션이 MoPub SDK의 AndroidManifest.xml에 포함되어 있습니다. ACCESS_COARSE_LOCATION 퍼미션을 제거하려면 애플리케이션의 AndroidManifest.xml에 다음을 추가하세요.
+MoPub SDK의 AndroidManifest.xml에 INTERNET(필수), ACCESS_NETWORK_STATE(필수) 그리고 ACCESS_COARSE_LOCATION(선택) 권한이 포함되어 있습니다. 이 중 ACCESS_COARSE_LOCATION은 사용자에게 권한 요청을 해야합니다.
+ACCESS_COARSE_LOCATION 퍼미션을 제거하려면 애플리케이션의 AndroidManifest.xml에 다음을 추가하세요.
 ~~~
 <manifest>
 	<uses-permission
@@ -60,9 +61,7 @@ INTERNET(필수), ACCESS_NETWORK_STATE(필수) 그리고 ACCESS_COARSE_LOCATION(
 ~~~
 
 ### 3. network_security_config.xml 추가
-Android 9.0 (API 28) blocks cleartext (non-HTTPS) traffic by default, which can prevent ads from serving correctly. To mitigate that, publishers whose apps run on Android 9.0 or above should ensure to add a network security config file. Doing so allowlists cleartext traffic and allows non-HTTPS ads to serve.
-앱의 targetSdkVersion 설정이 Android 9(API 레벨 28) 이상인 경우, 광고 노출 및 클릭이 정상적으로 동작하기 위해서는 일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요합니다.
-Android 9 (API 28)에서 cleartext HTTP 트래픽이 차단됩니다. 광고를 정상적으로 게재하기 위해 
+Android 9 (API 28) 이상에서는 cleartext HTTP 트래픽이 차단됩니다. `targetSdkVersion`이 28 이상인 경우, 광고를 정상적으로 게재하기 위해 이를 허용하는 네트워크 보안 설정이 필요합니다.
 AndroidManifest.xml에 다음을 추가하세요.
 ~~~
 <manifest>
@@ -71,7 +70,7 @@ AndroidManifest.xml에 다음을 추가하세요.
 	</application>
 </manifest>
 ~~~
-network_security_config.xml을 생성하고 cleartextTrafficPermitted를 true로 설정하는 base-config를 추가하세요.
+network_security_config.xml을 생성하고 cleartextTrafficPermitted를 true로 설정하는 base-config를 추가하세요. domain-config를 추가하면 특정 도메인은 항상 HTTPS를 사용하게 됩니다.
 ~~~
 <network-security-config>
 	<base-config cleartextTrafficPermitted="true">
