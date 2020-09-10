@@ -121,7 +121,7 @@ private SdkInitializationListener initSdkListener() {
 ~~~java
 private MoPubView moPubView;
 ~~~
-`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요. SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 위에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
+`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요. SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
 ~~~java
 moPubView = (MoPubView) findViewById(R.id.adview);
 moPubView.setAdUnitId(YOUR_BANNER_AD_UNIT_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
@@ -174,7 +174,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 ~~~java
 private MoPubInterstitial moPubInterstitial;
 ~~~
-`Activity`의 `onCreate()`에 다음을 추가하세요. SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 위에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
+`Activity`의 `onCreate()`에 다음을 추가하세요. SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
 ~~~java
 moPubInterstitial = new MoPubInterstitial(this, YOUR_INTERSTILTIAL_AD_UNIT_ID_HERE); // 발급 받은 인터스티셜 ad unit ID를 넣으세요.
 moPubInterstitial.load();
