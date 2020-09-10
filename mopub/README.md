@@ -122,7 +122,7 @@ private SdkInitializationListener initSdkListener() {
 ~~~java
 private MoPubView moPubView;
 ~~~
-`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요.
+`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요. SDK 초기화가 완료되어야 광고가 정상적으로 로드됩니다. 이를 보장하려면 위에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
 ~~~java
 moPubView = (MoPubView) findViewById(R.id.adview);
 moPubView.setAdUnitId(YOUR_BANNER_AD_UNIT_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
