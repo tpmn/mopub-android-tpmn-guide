@@ -54,9 +54,8 @@ MoPub SDK의 AndroidManifest.xml에 INTERNET(필수), ACCESS_NETWORK_STATE(필�
 ACCESS_COARSE_LOCATION 퍼미션을 제거하려면 애플리케이션의 AndroidManifest.xml에 다음을 추가하세요.
 ~~~
 <manifest>
-	<uses-permission
-	android:name="android.permission.ACCESS_COARSE_LOCATION"
-		tools:node="remove" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
+        tools:node="remove" />
 </manifest>
 ~~~
 
@@ -67,7 +66,7 @@ AndroidManifest.xml에 다음을 추가하세요.
 <manifest>
     <application
         android:networkSecurityConfig="@xml/network_security_config">
-	</application>
+    </application>
 </manifest>
 ~~~
 network_security_config.xml을 생성하고 cleartextTrafficPermitted를 true로 설정하는 base-config를 추가하세요. domain-config를 추가하면 특정 도메인은 항상 HTTPS를 사용하게 됩니다.
