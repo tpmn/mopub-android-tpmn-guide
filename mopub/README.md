@@ -94,6 +94,15 @@ SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_ID
 						.build();
                         
 MoPub.initializeSdk(this, sdkConfig, initSdkListener());
+
+private SdkInitializationListener initSdkListener() {
+    return new SdkInitializationListener() {
+        @Override
+        public void onInitializationFinished() {
+
+        }
+    };
+}
 ~~~
 
 ## MoPub 배너 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/banner/)
