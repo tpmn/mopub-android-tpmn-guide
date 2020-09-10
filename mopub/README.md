@@ -140,7 +140,7 @@ if (moPubView != null) {
 ### 3. 리스너 구현 (선택)
 ~~~java
 moPubView.setBannerAdListener(new BannerAdListener() {
-		@Override
+        @Override
 		public void onBannerLoaded(MoPubView banner) {
 			// Sent when the banner has successfully retrieved an ad.
 		}
