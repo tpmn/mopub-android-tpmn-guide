@@ -23,7 +23,7 @@
             + **Facebook Audience Network (필수)**: [가이드](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/facebookaudiencenetwork)
         - 서드 파티 네트워크: TPMN이 개발한 어댑터 사용
             + **AdFit (필수)**: [가이드](https://github.com/tpmn/mopub-android-mediation-custom/tree/master/adfit)
-            + **SuezX (준비 중)**
+            + SuezX (준비 중)
 - 광고 테스트
 - Android App Bundle(.aab) 빌드하여 전달
 
