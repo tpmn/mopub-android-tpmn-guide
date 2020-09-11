@@ -139,7 +139,7 @@ if (moPubView != null) {
 }
 ~~~
 
-### 3. 리스너 설정 (선택)
+### 3. 리스너 구현 및 설정
 ~~~java
 moPubView.setBannerAdListener(new BannerAdListener() {
         @Override
@@ -194,7 +194,8 @@ if (moPubInterstitial != null) {
 }
 ~~~
 
-### 2. 리스너 설정 (선택)
+### 2. 리스너 구현 및 설정
+[PointBerryImpressionTracker]()
 ~~~java
 moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
         @Override
@@ -238,7 +239,8 @@ if (MoPubRewardedVideos.hasRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE)) {
 }
 ~~~
 
-### 2. 리스너 설정 (선택)
+### 2. 리스너 구현 및 설정
+비디오 로드에 실패하거나, 기존 비디오를 닫으면 새 비디오를 로드하세요.
 ~~~java
 MoPubRewardedVideos.setRewardedVideoListener(new MoPubRewardedVideoListener() {
     @Override
