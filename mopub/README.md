@@ -195,7 +195,6 @@ if (moPubInterstitial != null) {
 ~~~
 
 ### 2. 리스너 구현 및 설정
-[PointBerryImpressionTracker]()
 ~~~java
 moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
         @Override
