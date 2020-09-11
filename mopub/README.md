@@ -124,8 +124,10 @@ private MoPubView moPubView;
 `Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 추가하세요.
 ~~~java
 moPubView = (MoPubView) findViewById(R.id.adview);
+
 moPubView.setAdUnitId(YOUR_BANNER_AD_UNIT_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
 moPubView.setAdSize(MoPubAdSize); // 선택. Call this if you are not setting the ad size in XML or wish to use an ad size other than what has been set in the XML. Note that multiple calls to `setAdSize()` will override one another, and the MoPub SDK only considers the most recent one.
+
 moPubView.loadAd(MoPubAdSize); // 선택. Call this if you are not calling setAdSize() or setting the size in XML, or if you are using the ad size that has not already been set through either setAdSize() or in the XML.
 moPubView.loadAd();
 ~~~
@@ -137,7 +139,7 @@ if (moPubView != null) {
 }
 ~~~
 
-### 3. 리스너 구현 (선택)
+### 3. 리스너 설정 (선택)
 ~~~java
 moPubView.setBannerAdListener(new BannerAdListener() {
         @Override
@@ -169,7 +171,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 
 ## MoPub 인터스티셜 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/interstitial/)
 
-### 1. 광고 로드
+### 1. 광고 로드 및 게재
 `Activity`에 `MoPubInterstitial` 객체를 선언하세요.
 ~~~java
 private MoPubInterstitial moPubInterstitial;
@@ -177,7 +179,9 @@ private MoPubInterstitial moPubInterstitial;
 `Activity`의 `onCreate()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 추가하세요.
 ~~~java
 moPubInterstitial = new MoPubInterstitial(this, YOUR_INTERSTILTIAL_AD_UNIT_ID_HERE); // 발급 받은 인터스티셜 ad unit ID를 넣으세요.
+
 moPubInterstitial.load();
+
 if (moPubInterstitial != null && moPubInterstitial.isReady()) {
 	moPubInterstitial.show();
 }
@@ -190,7 +194,7 @@ if (moPubInterstitial != null) {
 }
 ~~~
 
-### 2. 리스너 구현 (선택)
+### 2. 리스너 설정 (선택)
 ~~~java
 moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
         @Override
@@ -215,7 +219,66 @@ moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
 
         @Override
         public void onInterstitialDismissed(MoPubInterstitial interstitial) {
-            // The interstitial has being dismissed. Resume / load state accordingly.
+            // The interstitial has been dismissed. Resume / load state accordingly.
         }
+});
+~~~
+
+## MoPub 리워드 비디오 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/rewarded-video/)
+
+### 1. 광고 로드 및 게재
+비디오가 미리 로드될 수 있도록 최대한 빨리 (예를 들어, `Activity`의 `onCreate()`에서) `loadRewardedVideo()`를 호출하세요.
+~~~java
+MoPubRewardedVideos.loadRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE); // 발급 받은 리워드 비디오 ad unit ID를 넣으세요.
+~~~
+로드가 완료된 후에 게재하세요.
+~~~java
+if (MoPubRewardedVideos.hasRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE)) {
+    MoPubRewardedVideos.showRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE);
+}
+~~~
+
+### 2. 리스너 설정 (선택)
+~~~java
+MoPubRewardedVideos.setRewardedVideoListener(new MoPubRewardedVideoListener() {
+    @Override
+    public void onRewardedVideoLoadSuccess(@NonNull String adUnitId) {
+        // Called when the video for the given adUnitId has loaded. At this point you should be able to call MoPubRewardedVideos.showRewardedVideo(String) to show the video.
+    }
+    
+    @Override
+    public void onRewardedVideoLoadFailure(@NonNull String adUnitId, @NonNull MoPubErrorCode errorCode) {
+        // Called when a video fails to load for the given adUnitId. The provided error code will provide more insight into the reason for the failure to load.
+        
+        MoPubRewardedVideos.loadRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE);
+    }
+    
+    @Override
+    public void onRewardedVideoStarted(@NonNull String adUnitId) {
+        // Called when a rewarded video starts playing.
+    }
+    
+    @Override
+    public void onRewardedVideoPlaybackError(@NonNull String adUnitId, @NonNull MoPubErrorCode errorCode) {
+        //  Called when there is an error during video playback.
+    }
+    
+    @Override
+    public void onRewardedVideoClicked(@NonNull String adUnitId) {
+        //  Called when a rewarded video is clicked.
+    }
+    
+    @Override
+    public void onRewardedVideoClosed(@NonNull String adUnitId) {
+        // Called when a rewarded video is closed. At this point your application should resume.
+        
+        MoPubRewardedVideos.loadRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE);
+    }
+    
+    @Override
+    public void onRewardedVideoCompleted(@NonNull Set<String> adUnitIds, @NonNull MoPubReward reward) {
+        // Called when a rewarded video is completed and the user should be rewarded.
+        // You can query the reward object with boolean isSuccessful(), String getLabel(), and int getAmount().
+    }
 });
 ~~~
