@@ -51,7 +51,7 @@ android {
 
 ### 2. AndroidManifest.xml 업데이트
 MoPub SDK의 AndroidManifest.xml에 INTERNET(필수), ACCESS_NETWORK_STATE(필수) 그리고 ACCESS_COARSE_LOCATION(선택) 권한이 포함되어 있습니다. 이 중 ACCESS_COARSE_LOCATION은 사용자에게 권한 요청을 해야합니다.
-ACCESS_COARSE_LOCATION 퍼미션을 제거하려면 애플리케이션의 AndroidManifest.xml에 다음을 추가하세요.
+ACCESS_COARSE_LOCATION 권한을 제거하려면 애플리케이션의 AndroidManifest.xml에 다음을 추가하세요.
 ~~~
 <manifest>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
