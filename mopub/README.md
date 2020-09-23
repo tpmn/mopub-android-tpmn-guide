@@ -144,27 +144,27 @@ if (moPubView != null) {
 moPubView.setBannerAdListener(new BannerAdListener() {
         @Override
 		public void onBannerLoaded(MoPubView banner) {
-			// Sent when the banner has successfully retrieved an ad.
+            // The banner has successfully retrieved an ad.
 		}
 
-		@Override	
+        @Override	
 		public void onBannerFailed(MoPubView banner, MoPubErrorCode errorCode) {
-			// Sent when the banner has failed to retrieve an ad. You can use the MoPubErrorCode value to diagnose the cause of failure.
+            // The banner has failed to retrieve an ad. You can use the MoPubErrorCode value to diagnose the cause of failure.
 		}
 
-		@Override
+        @Override
 		public void onBannerClicked(MoPubView banner) {
-            // Sent when the user has tapped on the banner.
+            // The user has tapped on the banner.
 		}
 
-		@Override	
+        @Override	
 		public void onBannerExpanded(MoPubView banner) {
-			// Sent when the banner has just taken over the screen.
+            // The banner has just taken over the screen.
 		}
 
-		@Override	
+        @Override	
 		public void onBannerCollapsed(MoPubView banner) {
-			// Sent when an expanded banner has collapsed back to its original size.
+            // The expanded banner has collapsed back to its original size.
 		}
 });
 ~~~
