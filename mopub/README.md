@@ -143,29 +143,29 @@ if (moPubView != null) {
 ~~~java
 moPubView.setBannerAdListener(new BannerAdListener() {
         @Override
-		public void onBannerLoaded(MoPubView banner) {
+        public void onBannerLoaded(MoPubView banner) {
             // The banner has successfully retrieved an ad.
-		}
+        }
 
         @Override	
-		public void onBannerFailed(MoPubView banner, MoPubErrorCode errorCode) {
+        public void onBannerFailed(MoPubView banner, MoPubErrorCode errorCode) {
             // The banner has failed to retrieve an ad. You can use the MoPubErrorCode value to diagnose the cause of failure.
-		}
+        }
 
         @Override
-		public void onBannerClicked(MoPubView banner) {
+        public void onBannerClicked(MoPubView banner) {
             // The user has tapped on the banner.
-		}
+        }
 
-        @Override	
-		public void onBannerExpanded(MoPubView banner) {
+        @Override
+        public void onBannerExpanded(MoPubView banner) {
             // The banner has just taken over the screen.
-		}
+        }
 
-        @Override	
-		public void onBannerCollapsed(MoPubView banner) {
+        @Override
+        public void onBannerCollapsed(MoPubView banner) {
             // The expanded banner has collapsed back to its original size.
-		}
+        }
 });
 ~~~
 
