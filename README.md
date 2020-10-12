@@ -25,7 +25,7 @@
             + **AdFit (필수)**: [가이드](https://github.com/tpmn/mopub-android-mediation-custom/tree/master/adfit)
             + SuezX (준비 중)
 - 광고 테스트
-- Android App Bundle(.aab) 빌드하여 전달
+- APK 빌드하여 전달
 
 ### 4. TPMN
 - 스토어 출시
