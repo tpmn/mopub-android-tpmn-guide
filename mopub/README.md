@@ -109,7 +109,7 @@ private SdkInitializationListener initSdkListener() {
 ### 1. XML 레이아웃에 배너 인벤토리 정의
 ~~~
 <com.mopub.mobileads.MoPubView
-	android:id="@+id/adview"
+	android:id="@+id/banner"
 	android:layout_width=""
 	android:layout_height=""
 	app:moPubAdSize="">
@@ -121,9 +121,9 @@ private SdkInitializationListener initSdkListener() {
 ~~~java
 private MoPubView moPubView;
 ~~~
-`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 추가하세요.
+`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
 ~~~java
-moPubView = (MoPubView) findViewById(R.id.adview);
+moPubView = findViewById(R.id.banner);
 
 moPubView.setAdUnitId(YOUR_BANNER_AD_UNIT_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
 moPubView.setAdSize(MoPubAdSize); // 선택. Call this if you are not setting the ad size in XML or wish to use an ad size other than what has been set in the XML. Note that multiple calls to `setAdSize()` will override one another, and the MoPub SDK only considers the most recent one.
