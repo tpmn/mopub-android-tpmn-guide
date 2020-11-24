@@ -39,6 +39,6 @@ dependencies {
 `withAdditionalNetworks()`를 사용하여 MoPub SDK와 함께 SuezX SDK를 초기화하세요. 
 ~~~java
 SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_IDS_HERE) 
-        .withAdditionalNetworks(SuezXAdapterConfiguration.class.getName())
+        .withAdditionalNetwork(SuezXAdapterConfiguration.class.getName())
         .build();
 ~~~
