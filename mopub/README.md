@@ -35,8 +35,8 @@ implementation('com.mopub:mopub-sdk-native-static:5.13.1@aar') {
 Google의 정책에 따라 Google Advertising ID를 사용해야 합니다. 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 dependencies {
-	implementation ‘com.google.android.gms:play-services-ads-identifier:17.0.0’
-	implementation ‘com.google.android.gms:play-services-base:17.4.0’
+	implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+	implementation 'com.google.android.gms:play-services-base:17.4.0'
 }
 ~~~
 Java 8을 지원하려면 앱 수준 build.gradle에 다음을 추가하세요.
@@ -88,8 +88,8 @@ network_security_config.xml을 생성하고 cleartextTrafficPermitted를 true로
 `Activity`의 `onCreate()`에 다음을 추가하세요.
 ~~~java
 SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_IDS_HERE) // 발급 받은 ad unit ID 중 하나를 넣으세요.
-        .withLogLevel(LogLevel.Debug)
-        .withLegitimateInterestAllowded(true)
+        .withLogLevel(LogLevel.DEBUG)
+        .withLegitimateInterestAllowed(true)
         .build();
                         
 MoPub.initializeSdk(this, sdkConfig, initSdkListener());
