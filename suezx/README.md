@@ -31,7 +31,7 @@ SuezX SDK가 정상적으로 동작하도록 AndroidManifest.xml에 다음 권�
 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 dependencies {
-    implementation 'io.tpmn:mopub-suezx-adapter:2.0.0.0'
+    implementation 'io.tpmn:mopub-suezx-adapter:2.0.0.1'
 }
 ~~~
 
