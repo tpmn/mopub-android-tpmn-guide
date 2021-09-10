@@ -1,16 +1,16 @@
 # **MoPub**
 
-## MoPub SDK 통합 [(참고)](https://developers.mopub.com/publishers/android/integrate/)
+## MoPub SDK 연동 [(참고)](https://developers.mopub.com/publishers/android/integrate/)
 
 ### 1. MoPub SDK 다운로드
 MoPub SDK를 jCenter를 통해 다운로드할 수 있습니다. 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-	implementation('com.mopub:mopub-sdk:5.13.1@aar') {
+	implementation('com.mopub:mopub-sdk:5.18.0@aar') {
 		transitive = true
 	}
 }
@@ -18,25 +18,25 @@ dependencies {
 특정 광고 형식만을 포함하여 애플리케이션의 용량을 줄일 수도 있습니다. 앱 수준 build.gradle에 다음을 선택적으로 추가하세요.
 ~~~groovy
 // For banners
-implementation('com.mopub:mopub-sdk-banner:5.13.1@aar') {
+implementation('com.mopub:mopub-sdk-banner:5.18.0@aar') {
     transitive = true
 }
 
 // For fullscreen ads
-implementation('com.mopub:mopub-sdk-fullscreen:5.13.1@aar') {
+implementation('com.mopub:mopub-sdk-fullscreen:5.18.0@aar') {
 	transitive = true
 }
 
-// For native static (images).
-implementation('com.mopub:mopub-sdk-native-static:5.13.1@aar') {
+// For native static (images)
+implementation('com.mopub:mopub-sdk-native-static:5.18.0@aar') {
 	transitive = true
 }
 ~~~
 Google의 정책에 따라 Google Advertising ID를 사용해야 합니다. 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 dependencies {
-	implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
-	implementation 'com.google.android.gms:play-services-base:17.4.0'
+	implementation 'com.google.android.gms:play-services-ads-identifier:17.0.1'
+	implementation 'com.google.android.gms:play-services-base:17.6.0'
 }
 ~~~
 Java 8을 지원하려면 앱 수준 build.gradle에 다음을 추가하세요.
@@ -57,31 +57,6 @@ ACCESS_COARSE_LOCATION 권한을 제거하려면 애플리케이션의 AndroidMa
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
         tools:node="remove" />
 </manifest>
-~~~
-
-### 3. network_security_config.xml 추가
-Android 9 (API 28) 이상에서는 cleartext HTTP 트래픽이 차단됩니다. `targetSdkVersion`이 28 이상인 경우, 광고를 정상적으로 게재하기 위해 이를 허용하는 네트워크 보안 설정이 필요합니다.
-AndroidManifest.xml에 다음을 추가하세요.
-~~~
-<manifest>
-    <application
-        android:networkSecurityConfig="@xml/network_security_config">
-    </application>
-</manifest>
-~~~
-network_security_config.xml을 생성하고 cleartextTrafficPermitted를 true로 설정하는 base-config를 추가하세요. domain-config를 추가하면 특정 도메인은 항상 HTTPS를 사용하게 됩니다.
-~~~
-<network-security-config>
-	<base-config cleartextTrafficPermitted="true">
-		<trust-anchors>
-			<certificates src="system"/>
-		</trust-anchors>
-	</base-config>
-	<domain-config cleartextTrafficPermitted="false">
-		<domain includeSubdomains="true">example.com</domain>
-		<domain includeSubdomains="true">cdn.example2.com</domain>
-	</domain-config>
-</network-security-config>
 ~~~
 
 ## MoPub SDK 초기화 [(참고)](https://developers.mopub.com/publishers/android/initialize/)
@@ -176,7 +151,7 @@ moPubView.setBannerAdListener(new BannerAdListener() {
 ~~~java
 private MoPubInterstitial moPubInterstitial;
 ~~~
-`Activity`의 `onCreate()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 추가하세요.
+`Activity`의 `onCreate()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
 ~~~java
 moPubInterstitial = new MoPubInterstitial(this, YOUR_INTERSTILTIAL_AD_UNIT_ID_HERE); // 발급 받은 인터스티셜 ad unit ID를 넣으세요.
 
@@ -224,61 +199,61 @@ moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
 });
 ~~~
 
-## MoPub 리워드 비디오 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/rewarded-video/)
+## MoPub 리워드 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/rewarded-ad/)
 
 ### 1. 광고 로드 및 게재
-비디오가 미리 로드될 수 있도록 최대한 빨리 (예를 들어, `Activity`의 `onCreate()`에서) `loadRewardedVideo()`를 호출하세요.
+광고가 미리 로드될 수 있도록 최대한 빨리 (예를 들어, `Activity`의 `onCreate()`에서) `loadRewardedAd()`를 호출하세요.
 ~~~java
-MoPubRewardedVideos.loadRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE); // 발급 받은 리워드 비디오 ad unit ID를 넣으세요.
+MoPubRewardedAds.loadRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE); // 발급 받은 리워드 ad unit ID를 넣으세요.
 ~~~
 로드가 완료된 후에 게재하세요.
 ~~~java
-if (MoPubRewardedVideos.hasRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE)) {
-    MoPubRewardedVideos.showRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE);
+if (MoPubRewardedAds.hasRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE)) {
+    MoPubRewardedAds.showRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE);
 }
 ~~~
 
 ### 2. 리스너 구현 및 설정
-비디오 로드에 실패하거나, 기존 비디오를 닫으면 새 비디오를 로드하세요.
+광고 로드에 실패하거나, 기존 광고를 닫으면 새 광고를 로드하세요.
 ~~~java
-MoPubRewardedVideos.setRewardedVideoListener(new MoPubRewardedVideoListener() {
+MoPubRewardedAds.setRewardedAdListener(new MoPubRewardedAdListener() {
     @Override
-    public void onRewardedVideoLoadSuccess(@NonNull String adUnitId) {
-        // Called when the video for the given adUnitId has loaded. At this point you should be able to call MoPubRewardedVideos.showRewardedVideo(String) to show the video.
+    public void onRewardedAdLoadSuccess(String adUnitId) {
+        // Called when the ad for the given adUnitId has loaded. At this point you should be able to call MoPubRewardedAds.showRewardedAd(String) to show the ad.
     }
     
     @Override
-    public void onRewardedVideoLoadFailure(@NonNull String adUnitId, @NonNull MoPubErrorCode errorCode) {
-        // Called when a video fails to load for the given adUnitId. The provided error code will provide more insight into the reason for the failure to load.
+    public void onRewardedAdLoadFailure(String adUnitId, MoPubErrorCode errorCode) {
+        // Called when a ad fails to load for the given adUnitId. The provided error code will provide more insight into the reason for the failure to load.
         
-        MoPubRewardedVideos.loadRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE);
+        MoPubRewardedAds.loadRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE);
     }
     
     @Override
-    public void onRewardedVideoStarted(@NonNull String adUnitId) {
-        // Called when a rewarded video starts playing.
+    public void onRewardedAdStarted(String adUnitId) {
+        // Called when a rewarded ad starts playing.
     }
     
     @Override
-    public void onRewardedVideoPlaybackError(@NonNull String adUnitId, @NonNull MoPubErrorCode errorCode) {
-        //  Called when there is an error during video playback.
+    public void onRewardedAdShowError(String adUnitId, MoPubErrorCode errorCode) {
+        //  Called when there is an error while attempting to show the ad.
     }
     
     @Override
-    public void onRewardedVideoClicked(@NonNull String adUnitId) {
-        //  Called when a rewarded video is clicked.
+    public void onRewardedAdClicked(String adUnitId) {
+        //  Called when a rewarded ad is clicked.
     }
     
     @Override
-    public void onRewardedVideoClosed(@NonNull String adUnitId) {
-        // Called when a rewarded video is closed. At this point your application should resume.
+    public void onRewardedAdClosed(String adUnitId) {
+        // Called when a rewarded ad is closed. At this point your application should resume.
         
-        MoPubRewardedVideos.loadRewardedVideo(YOUR_REWARDED_VIDEO_AD_UNIT_ID_HERE);
+        MoPubRewardedAds.loadRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE);
     }
     
     @Override
-    public void onRewardedVideoCompleted(@NonNull Set<String> adUnitIds, @NonNull MoPubReward reward) {
-        // Called when a rewarded video is completed and the user should be rewarded.
+    public void onRewardedAdCompleted(Set<String> adUnitIds, MoPubReward reward) {
+        // Called when a rewarded ad is completed and the user should be rewarded.
         // You can query the reward object with boolean isSuccessful(), String getLabel(), and int getAmount().
     }
 });
