@@ -52,7 +52,7 @@ android {
 ### 2. AndroidManifest.xml 업데이트
 MoPub SDK의 AndroidManifest.xml에 INTERNET(필수), ACCESS_NETWORK_STATE(필수) 그리고 ACCESS_COARSE_LOCATION(선택) 권한이 포함되어 있습니다. 이 중 ACCESS_COARSE_LOCATION은 사용자에게 권한 요청을 해야합니다.
 ACCESS_COARSE_LOCATION 권한을 제거하려면 애플리케이션의 AndroidManifest.xml에 다음을 추가하세요.
-~~~
+~~~xml
 <manifest>
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"
         tools:node="remove" />
@@ -62,7 +62,7 @@ ACCESS_COARSE_LOCATION 권한을 제거하려면 애플리케이션의 AndroidMa
 ## MoPub SDK 초기화 [(참고)](https://developers.mopub.com/publishers/android/initialize/)
 `Activity`의 `onCreate()`에 다음을 추가하세요.
 ~~~java
-SdkConfiguration sdkConfig = new SdkConfiguration.Builder(ANY_OF_YOUR_AD_UNIT_IDS_HERE) // 발급 받은 ad unit ID 중 하나를 넣으세요.
+SdkConfiguration sdkConfig = new SdkConfiguration.Builder("ANY_OF_YOUR_AD_UNIT_IDS_HERE") // 발급 받은 ad unit ID 중 하나를 넣으세요.
         .withLogLevel(LogLevel.DEBUG)
         .withLegitimateInterestAllowed(true)
         .build();
@@ -82,7 +82,7 @@ private SdkInitializationListener initSdkListener() {
 ## MoPub 배너 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/banner/)
 
 ### 1. XML 레이아웃에 배너 인벤토리 정의
-~~~
+~~~xml
 <com.mopub.mobileads.MoPubView
 	android:id="@+id/banner"
 	android:layout_width=""
@@ -100,7 +100,7 @@ private MoPubView moPubView;
 ~~~java
 moPubView = findViewById(R.id.banner);
 
-moPubView.setAdUnitId(YOUR_BANNER_AD_UNIT_ID_HERE); // 발급 받은 배너 ad unit ID를 넣으세요.
+moPubView.setAdUnitId("YOUR_BANNER_AD_UNIT_ID_HERE"); // 발급 받은 배너 ad unit ID를 넣으세요.
 moPubView.setAdSize(MoPubAdSize); // 선택. Call this if you are not setting the ad size in XML or wish to use an ad size other than what has been set in the XML. Note that multiple calls to `setAdSize()` will override one another, and the MoPub SDK only considers the most recent one.
 
 moPubView.loadAd(MoPubAdSize); // 선택. Call this if you are not calling setAdSize() or setting the size in XML, or if you are using the ad size that has not already been set through either setAdSize() or in the XML.
@@ -153,7 +153,7 @@ private MoPubInterstitial moPubInterstitial;
 ~~~
 `Activity`의 `onCreate()`에 다음을 추가하세요. 단, SDK 초기화가 완료된 후에 광고를 요청해야 합니다. 이를 보장하려면 [위](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/mopub#mopub-sdk-초기화-참고)에서 작성한 `onInitializationFinished()` 콜백에 다음을 추가하세요.
 ~~~java
-moPubInterstitial = new MoPubInterstitial(this, YOUR_INTERSTILTIAL_AD_UNIT_ID_HERE); // 발급 받은 인터스티셜 ad unit ID를 넣으세요.
+moPubInterstitial = new MoPubInterstitial(this, "YOUR_INTERSTILTIAL_AD_UNIT_ID_HERE"); // 발급 받은 인터스티셜 ad unit ID를 넣으세요.
 
 moPubInterstitial.load();
 
@@ -199,17 +199,90 @@ moPubInterstitial.setInterstitialAdListener(new InterstitialAdListener() {
 });
 ~~~
 
+## MoPub 네이티브 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/native-recyclerview/)
+
+### 1. XML 레이아웃 정의
+~~~xml
+ <RelativeLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     android:id="@+id/native_ad"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
+
+     <ImageView
+         android:id="@+id/native_ad_main_image" />
+     <ImageView
+         android:id="@+id/native_ad_icon_image" />
+     <TextView
+         android:id="@+id/native_ad_title" />
+     <TextView
+         android:id="@+id/native_ad_text" />
+     <ImageView
+         android:id="@+id/native_ad_privacy_information_icon_image"
+         android:layout_width="40dp"
+         android:layout_height="40dp"
+         android:padding="10dp" />
+     <TextView
+         android:id="@+id/native_ad_sponsored_text_view" />
+ </RelativeLayout>
+ ~~~
+
+### 2. 광고 로드
+`Activity` 또는 `Fragment`에 `MoPubRecyclerAdapter` 객체를 선언하세요.
+~~~java
+private MoPubRecyclerAdapter moPubAdapter;
+~~~
+`Activity`의 `onCreate()` 또는 `Fragment`의 `onCreateView()`에 다음을 추가하세요.
+~~~java
+moPubAdapter = new MoPubRecyclerAdapter(this, yourRecyclerAdapter); // Activity
+moPubAdapter = new MoPubRecyclerAdapter(getActivity(), yourRecyclerAdapter); // Fragment
+
+ViewBinder viewBinder = new ViewBinder.Builder(R.layout.native_ad)
+        .mainImageId(R.id.native_ad_main_image)
+        .iconImageId(R.id.native_ad_icon_image)
+        .titleId(R.id.native_ad_title)
+        .textId(R.id.native_ad_text)
+        .privacyInformationIconImageId(R.id.native_ad_privacy_information_icon_image)
+        .sponsoredTextId(R.id.native_ad_sponsored_text_view)
+        .build();
+
+MoPubStaticNativeAdRenderer moPubRenderer = new MoPubStaticNativeAdRenderer(viewBinder);
+
+moPubAdapter.registerAdRenderer(moPubRenderer);
+
+yourRecyclerView.setAdapter(moPubAdapter);
+
+moPubAdapter.loadAds("YOUR_NATIVE_AD_UNIT_ID_HERE"); // 발급 받은 네이티브 ad unit ID를 넣으세요.
+~~~
+`Activity`의 `onDestroy()` 또는 `Fragment`의 `onDestroyView()`에 다음을 추가하세요.
+~~~java
+moPubAdapter.destroy();
+~~~
+
+### 3. 리스너 구현 및 설정
+~~~java
+moPubAdapter.setAdLoadedListener(new MoPubNativeAdLoadedListener() {
+    @Override
+    public void onAdLoaded(int position) {
+    }
+
+    @Override
+    public void onAdRemoved(int position) {
+    }
+    });
+~~~
+
 ## MoPub 리워드 광고 구현 [(참고)](https://developers.mopub.com/publishers/android/rewarded-ad/)
 
 ### 1. 광고 로드 및 게재
 광고가 미리 로드될 수 있도록 최대한 빨리 (예를 들어, `Activity`의 `onCreate()`에서) `loadRewardedAd()`를 호출하세요.
 ~~~java
-MoPubRewardedAds.loadRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE); // 발급 받은 리워드 ad unit ID를 넣으세요.
+MoPubRewardedAds.loadRewardedAd("YOUR_REWARDED_AD_UNIT_ID_HERE"); // 발급 받은 리워드 ad unit ID를 넣으세요.
 ~~~
 로드가 완료된 후에 게재하세요.
 ~~~java
-if (MoPubRewardedAds.hasRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE)) {
-    MoPubRewardedAds.showRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE);
+if (MoPubRewardedAds.hasRewardedAd("YOUR_REWARDED_AD_UNIT_ID_HERE")) {
+    MoPubRewardedAds.showRewardedAd("YOUR_REWARDED_AD_UNIT_ID_HERE");
 }
 ~~~
 
@@ -226,7 +299,7 @@ MoPubRewardedAds.setRewardedAdListener(new MoPubRewardedAdListener() {
     public void onRewardedAdLoadFailure(String adUnitId, MoPubErrorCode errorCode) {
         // Called when a ad fails to load for the given adUnitId. The provided error code will provide more insight into the reason for the failure to load.
         
-        MoPubRewardedAds.loadRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE);
+        MoPubRewardedAds.loadRewardedAd("YOUR_REWARDED_AD_UNIT_ID_HERE");
     }
     
     @Override
@@ -248,7 +321,7 @@ MoPubRewardedAds.setRewardedAdListener(new MoPubRewardedAdListener() {
     public void onRewardedAdClosed(String adUnitId) {
         // Called when a rewarded ad is closed. At this point your application should resume.
         
-        MoPubRewardedAds.loadRewardedAd(YOUR_REWARDED_AD_UNIT_ID_HERE);
+        MoPubRewardedAds.loadRewardedAd("YOUR_REWARDED_AD_UNIT_ID_HERE");
     }
     
     @Override
