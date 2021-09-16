@@ -22,7 +22,7 @@ allprojects {
 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 dependencies {
-	implementation 'com.google.android.gms:play-services-ads:20.2.0'
+	implementation 'com.google.android.gms:play-services-ads:20.3.0'
 }
 ~~~
 
@@ -43,6 +43,6 @@ AndroidManifest.xml에 다음을 추가하세요.
 앱 수준 build.gradle에 다음을 추가하세요.
 ~~~groovy
 dependencies {
-	implementation 'com.mopub.mediation:admob:20.2.0.2'
+	implementation 'com.mopub.mediation:admob:20.3.0.0'
 }
 ~~~
