@@ -5,6 +5,7 @@
 ### 미디에이션 네트워크
 
 - MoPub 파트너 네트워크: MoPub이 지원하는 어댑터 사용
+  - [AdColony](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/adcolony)
   - [AdMob](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/admob)
   - [Facebook Audience Network](https://github.com/tpmn/mopub-android-tpmn-guide/tree/master/facebookaudiencenetwork)
 - 서드 파티 네트워크: TPMN이 개발한 어댑터 사용
